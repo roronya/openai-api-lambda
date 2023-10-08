@@ -8,7 +8,39 @@ tasks:
     cmds:
       - zip function.zip forward_to_openai.py
 
-  clean:
+  rm:
     desc: ビルドとデプロイのために作成したファイルを削除します
     cmds:
       - rm function.zip
+
+  plan:
+    desc: terraform plan
+    cmds:
+      - terraform plan
+
+  apply:
+    desc: terraform apply
+    cmds:
+      - terraform apply -auto-approve
+
+  destroy:
+    desc: terraform destroy
+    cmds:
+      - terraform destroy
+
+  update:
+    desc: update lambda
+    cmds:
+      - aws lambda update-function-code --function-name OpenAI_Forwarder --zip-file fileb://function.zip
+
+  deploy:
+    desc: deploy lambda
+    cmds:
+      - task: zip
+      - task: update
+
+  clean:
+    desc: rm & destroy
+    cmds:
+      - task: rm
+      - task: destroy
