@@ -1,0 +1,14 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  zip:
+    desc: lambdaにデプロイするためにPythonのソースコードをzipに固めます
+    cmds:
+      - zip function.zip forward_to_openai.py
+
+  clean:
+    desc: ビルドとデプロイのために作成したファイルを削除します
+    cmds:
+      - rm function.zip
