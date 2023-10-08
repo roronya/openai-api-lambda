@@ -39,5 +39,5 @@ jobs:
 
       - name: Deploy to AWS Lambda
         run: |
-          ./bin/task deploy
+          OPENAI_API_KEY=${{secrets.OPENAI_API_KEY}} ./bin/task deploy
 
