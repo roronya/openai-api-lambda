@@ -22,21 +22,6 @@ tasks:
     cmds:
       - rm function.zip
 
-  plan:
-    desc: terraform plan
-    cmds:
-      - terraform plan
-
-  apply:
-    desc: terraform apply
-    cmds:
-      - terraform apply -auto-approve
-
-  destroy:
-    desc: terraform destroy
-    cmds:
-      - terraform destroy
-
   update:
     desc: update lambda
     cmds:
