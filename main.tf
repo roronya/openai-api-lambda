@@ -97,3 +97,27 @@ resource "aws_iam_role_policy_attachment" "lambda_api_gateway_attach" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = aws_iam_policy.lambda_api_gateway_invoke.arn
 }
+
+# add iam policy to lambda for logging
+resource "aws_iam_policy" "lambda_logging" {
+  name        = "LambdaLogging"
+  description = "Allows logging for Lambda function"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Action = [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      Effect   = "Allow",
+      Resource = "arn:aws:logs:*:*:*"
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_logging_attach" {
+  role       = aws_iam_role.lambda_role.name
+  policy_arn = aws_iam_policy.lambda_logging.arn
+}
