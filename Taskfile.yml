@@ -5,8 +5,14 @@ version: '3'
 tasks:
   zip:
     desc: lambdaにデプロイするためにPythonのソースコードをzipに固めます
+    dir: work
     cmds:
-      - zip function.zip forward_to_openai.py
+      - cp ../forward_to_openai.py ./
+      - poetry export -f requirements.txt --output requirements.txt
+      - poetry run pip install -r requirements.txt -t .
+      - zip -r function.zip *
+      - mv function.zip ../
+      - cd ../ && rm -rf work
 
   rm:
     desc: ビルドとデプロイのために作成したファイルを削除します
