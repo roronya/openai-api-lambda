@@ -35,6 +35,7 @@ tasks:
     cmds:
       - task: zip
       - task: update
+      - task: rm
 
   clean:
     desc: rm & destroy
