@@ -1,6 +1,15 @@
+terraform {
+  backend "s3" {
+    bucket = "tfstate-openai-api-lambda"
+    key = "terraform.tfstate"
+    region = "ap-northeast-1"
+  }
+}
+
 provider "aws" {
   region = "ap-northeast-1"
 }
+
 
 resource "aws_iam_role" "lambda_role" {
   name = "OpenAILambdaRole"
