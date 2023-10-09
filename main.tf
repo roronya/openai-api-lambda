@@ -12,6 +12,7 @@ provider "aws" {
 }
 
 
+# openai-forwarderを実行するIAMロールの定義
 resource "aws_iam_role" "lambda_role" {
   name = "openai-forwarder-role"
 
@@ -27,6 +28,7 @@ resource "aws_iam_role" "lambda_role" {
   })
 }
 
+# ↑のIAMロールにCloudWatchへの書き込み権限を付けてロギングできるようにしている
 resource "aws_iam_role_policy" "lambda_logging_policy" {
   name   = "lambda-logging"
   role   = aws_iam_role.lambda_role.name
