@@ -1,4 +1,4 @@
-# openai-api-lambda
+# openai-forwarder
 
 このリポジトリはOpenAIのAPIキーを隠蔽するためのlambdaのリソースとそのソースコードが置かれています。
 
@@ -6,7 +6,7 @@
 
 terraformは他のAWSリソースに影響を与えないように、このリポジトリで使うためだけのIAM Roleを用意した。
 
-tfstateもs3にtfstate-openai-api-lambdaを用意していて、他から独立している。
+tfstateもs3にtfstate-openai-forwarderを用意していて、他から独立している。
 
 ## デプロイ
 

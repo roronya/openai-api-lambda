@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "openai-api-lambda"
+name = "openai-forwarder"
 version = "0.1.0"
 description = ""
 authors = ["roronya <roronya628@gmail.com>"]

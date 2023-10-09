@@ -1,7 +1,7 @@
 terraform {
   required_version = "1.5.6"
   backend "s3" {
-    bucket = "tfstate-openai-api-lambda"
+    bucket = "tfstate-openai-forwarder"
     key = "terraform.tfstate"
     region = "ap-northeast-1"
   }
@@ -13,7 +13,7 @@ provider "aws" {
 
 
 resource "aws_iam_role" "lambda_role" {
-  name = "OpenAILambdaRole"
+  name = "openai-forwarder-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -28,7 +28,7 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_iam_role_policy" "lambda_logging_policy" {
-  name   = "LambdaLogging"
+  name   = "lambda-logging"
   role   = aws_iam_role.lambda_role.name
   policy = jsonencode({
     Version = "2012-10-17",
@@ -46,9 +46,9 @@ resource "aws_iam_role_policy" "lambda_logging_policy" {
 
 resource "aws_lambda_function" "openai_forwarder" {
   filename      = "function.zip"
-  function_name = "OpenAI_Forwarder"
+  function_name = "openai-forwarder"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "forward_to_openai.lambda_handler"
+  handler       = "openai-forwarder.lambda_handler"
   runtime       = "python3.11"
 
   environment {
