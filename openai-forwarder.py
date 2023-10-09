@@ -1,5 +1,6 @@
 import logging
 import os
+
 import openai
 
 logger = logging.getLogger()
@@ -16,4 +17,3 @@ def lambda_handler(event, context):
     )
     logger.info(response)
     return response
-
